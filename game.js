@@ -1,4 +1,5 @@
 let preys = [];
+let scoreBoard;
 let predators = [];
 let explosions = [];
 let up = false;
@@ -10,35 +11,6 @@ let numPredators = 4;
 var Neuvol;
 
 let numSensors = 6;
-// // timeout listener setup
-// (function() {
-// 	var timeouts = [];
-// 	var messageName = "zero-timeout-message";
-
-//         // Like setTimeout, but only takes a function argument.  There's
-//         // no time argument (always zero) and no arguments (you have to
-//         // use a closure).
-// function setZeroTimeout(fn) {
-// 	timeouts.push(fn);
-// 	window.postMessage(messageName, "*");
-// }
-
-// function handleMessage(event) {
-// 	if (event.source == window && event.data == messageName) {
-// 		event.stopPropagation();
-// 		if (timeouts.length > 0) {
-// 			var fn = timeouts.shift();
-// 			fn();
-// 		}
-// 	}
-// }
-
-// window.addEventListener("message", handleMessage, true);
-
-//         // Add the one thing we want added to the window object.
-//         window.setZeroTimeout = setZeroTimeout;
-//     })();
-// // End timeout listener setup
 
 class Game {
   constructor() {
@@ -46,18 +18,18 @@ class Game {
     this.ships = [];
 
     this.score = 0;
-
+    this.scoreBoard = new StatBoard(0, 0, 3, numPrey)
     // this.canvas = document.querySelector("#SurvivalOfTheFittest");
     // this.ctx = this.canvas.getContext("2d");
     this.width = width;
     this.height = height;
+    this.runSpeed = 1;
 
     this.spawnInterval = 120;
     this.interval = 0;
     this.maxPredators = 2;
 
     this.gen = [];
-
     this.alives = 0;
     this.generation = 0;
   }
@@ -82,7 +54,7 @@ class Game {
         predators.push(pd);
     }
     this.gen = Neuvol.nextGeneration();
-    print("HIa");
+    //print("HIa");
   }
   
   display() {
@@ -103,14 +75,15 @@ class Game {
           preys[j].damage(predators[i].damage);
         }
         if (!(preys[j].isAlive)) {
-          print( "prey " + j + " is dead");
-          let kaboom = new explosion([0, 100, 255], 15, 1,  preys[j].position.x, preys[j].position.y);
+          //print( "prey " + j + " is dead");
+          let kaboom = new explosion([0, 100, 200], 15, 1,  preys[j].position.x, preys[j].position.y, 45);
           explosions.push(kaboom);
           preys.splice(j, 1);
-          print(preys.length)
+          //print(preys.length)
         }
       }
     }
+    this.scoreBoard.update(this.alives, this.score);
   }
   isItEnd() {
     // check if any ship is still alive
@@ -237,11 +210,10 @@ function setup() {
 
 
 function draw() {
-  background(50, 89, 100);
+  background(90, 89, 90);
   game.update();
   game.display();
 }
-
 
 function keyTyped() {
   if (key === 'w') {

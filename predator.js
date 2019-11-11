@@ -4,7 +4,7 @@ class Predator {
     
     this.health = 1000;
     this.isAlive = true;
-    this.damage = 100;
+    this.damage = 1;
     this.moveSpeed = random(1,3);
     this.rotationSpeed = 0.06;
     this.position = createVector(random(0,width), random(0,height));

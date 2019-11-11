@@ -1,6 +1,7 @@
 class Prey {
 
   constructor(json) {
+    this.maxHealth = 100;
     this.health = 100;
     this.isAlive = true;
     this.position = createVector(random(0, width), random(0, height));
@@ -86,6 +87,7 @@ class Prey {
       ellipse(this.position.x - 3, this.position.y - 3, this.width / 2, this.height / 2);
       strokeWeight(1);
       this.showSensors();
+      this.setHealthBar();
     }
     
   }
@@ -93,7 +95,11 @@ class Prey {
 	this.position.x += this.movex * this.moveSpeed;
 	this.position.y += this.movey * this.moveSpeed;
   }
-  
+  setHealthBar() {
+    fill(0, 255, 0);
+    strokeWeight(0);
+    rect(this.position.x - this.width / 2, this.position.y + this.height / 1.5, this.width - ((this.maxHealth / this.health)), this.height / 4);
+  }
   manualMove(forwards, backwards, spinLeft, spinRight) {
     if (this.health > 0) {
       if (spinLeft) {
@@ -131,7 +137,7 @@ class Prey {
       let x2 = x1 + Math.cos(Math.PI * 2 / this.numSensors * j) * this.sensorSize;
       let y2 = y1 + Math.sin(Math.PI * 2/ this.numSensors * j) * this.sensorSize;
       stroke(0, 200, 100);
-      //line(x1, y1, x2, y2);
+      line(x1, y1, x2, y2);
       stroke(0, 0, 0);
       //print("(" + x1 + ", " + y1 + ")" + " to (" + x2 + ", " + y2 + ")");
       

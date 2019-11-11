@@ -1,7 +1,7 @@
 class explosion {
-  constructor(color, particleCount, force, x, y) {
+  constructor(color, particleCount, force, x, y, size) {
     this.numAlive = particleCount;
-    this.size = 38;
+    this.size = size;
     this.color = color; //array with rgb value
     this.particles = [];
     this.position = createVector(x, y);
