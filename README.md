@@ -14,3 +14,5 @@ a simple algorithmic AI pattern.
 ## Future Plans
 - add effects and general polish.
 - make the predators starve if they don't eat enough (not certain).
+
+![Example Gif](https://github.com/JohnSmoit/SurvivalOfTheFittest2/blob/master/img/ExampleGif.gif)
