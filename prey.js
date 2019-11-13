@@ -74,7 +74,7 @@ class Prey {
     // print(this.rotation);
   }
   
-  display() {
+  display(shouldShowSensors) {
     this.periodicBundaries();
     this.autoMove();
     if (this.health > 0) {
@@ -86,7 +86,9 @@ class Prey {
       strokeWeight(0);
       ellipse(this.position.x - 3, this.position.y - 3, this.width / 2, this.height / 2);
       strokeWeight(1);
-      this.showSensors();
+      if (shouldShowSensors) {
+        this.showSensors();
+      }
       this.setHealthBar();
     }
     
@@ -98,7 +100,7 @@ class Prey {
   setHealthBar() {
     fill(0, 255, 0);
     strokeWeight(0);
-    rect(this.position.x - this.width / 2, this.position.y + this.height / 1.5, this.width - ((this.maxHealth / this.health)), this.height / 4);
+    rect(this.position.x - this.width / 2, this.position.y + this.height / 1.5, this.health / this.width *10, this.height / 4);
   }
   manualMove(forwards, backwards, spinLeft, spinRight) {
     if (this.health > 0) {

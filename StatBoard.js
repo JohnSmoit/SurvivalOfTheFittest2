@@ -21,7 +21,7 @@ class StatBoard {
     image(this.sprite, this.position.x, this.position.y);
     scale(1);
     text("Alive: " + this.numAlive + "/" + this.maxAlive, this.position.x + 20, this.position.y + 20);
-    text("Highscore: " + this.highScore, this.position.x + 20, this.position.y + 35);
+    text("Highscore: " + this.highScore, this.position.x + 10, this.position.y + 35);
   }
   update(alives, highscore) {
     this.setScoreValues(alives, highscore);
