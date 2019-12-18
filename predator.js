@@ -1,13 +1,14 @@
 class Predator {
-  
+
   constructor() {
-    
+
     this.health = 1000;
+    this.particles = [];
     this.isAlive = true;
     this.damage = 1;
-    this.moveSpeed = random(1,3);
+    this.moveSpeed = random(1, 3);
     this.rotationSpeed = 0.06;
-    this.position = createVector(random(0,width), random(0,height));
+    this.position = createVector(random(0, width), random(0, height));
     this.velocity = createVector(0, 0);
     this.rotation = 0;
     this.height = 50;
@@ -34,37 +35,46 @@ class Predator {
     this.position.add(this.velocity);
   }
   display() {
-    fill(255, 0, 0);
+    if (random(1, 3) < 1.8) {
+      this.particles.push(new particle(this.position.x, this.position.y, random(0, 0.2), [random(180, 255), 0, 0], false, 1.7));
+    }
+    for (let b = 0; b < this.particles.length; b++) {
+      if (this.particles[b].isAlive) {
+        this.particles[b].update();
+        this.particles[b].display();
+      } else {
+        this.particles.splice(b, 1);
+      }
+    }
+    /*fill(255, 0, 0);
     strokeWeight(2);
-    ellipse(this.position.x, this.position.y, this.width, this.height);
+    ellipse(this.position.x, this.position.y, this.width, this.height);*/
   }
-  
+
   update(targets) {
     this.move(targets);
     this.display();
     this.periodicBundaries();
   }
-  
+
   periodicBundaries() {
-    let x_radius = floor(this.width/2);
-    let y_radius = floor(this.height/2);
+    let x_radius = floor(this.width / 2);
+    let y_radius = floor(this.height / 2);
     // Check if at boundary
     if (this.position.x + x_radius < 0) {
       // push to right side
       this.position.x = x_radius + width;
-    }
-    else if (this.position.x - x_radius > width) {
+    } else if (this.position.x - x_radius > width) {
       // push to left side
-      this.position.x = - x_radius ;
+      this.position.x = -x_radius;
     }
     if (this.position.y + y_radius < 0) {
       // push to bottom
       this.position.y = y_radius + height;
-    }
-    else if (this.position.y - y_radius > height) {
+    } else if (this.position.y - y_radius > height) {
       // push to top
-      this.position.y = - y_radius
+      this.position.y = -y_radius
     }
   }
-  
+
 }

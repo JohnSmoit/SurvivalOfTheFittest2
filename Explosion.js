@@ -7,7 +7,7 @@ class explosion {
     this.position = createVector(x, y);
     this.isAlive = true;
     for (let i = 0; i < particleCount; i++) {
-      this.particles.push(new particle(this.position.x, this.position.y, force, this.color));
+      this.particles.push(new particle(this.position.x, this.position.y, force, this.color, true, 1));
     }
   }
   update() {

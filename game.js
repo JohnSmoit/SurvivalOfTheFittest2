@@ -78,7 +78,7 @@ class Game {
         }
         if (!(preys[j].isAlive)) {
           //print( "prey " + j + " is dead");
-          let kaboom = new explosion([0, 100, 200], 15, 1, preys[j].position.x, preys[j].position.y, 45);
+          let kaboom = new explosion([0, 0, 200], 15, 1, preys[j].position.x, preys[j].position.y, 45);
           explosions.push(kaboom);
           preys.splice(j, 1);
           //print(preys.length)
@@ -100,9 +100,10 @@ class Game {
     //   }
     // }
     if (this.alives > 0) {
-      print(this.alives);
+      // print(this.alives);
       return false;
     } else {
+      this.scoreBoard.getHighScore(this.score);
       return true;
     }
 
@@ -188,6 +189,7 @@ class Game {
 function setup() {
   frameRate(60);
   createCanvas(800, 800);
+  //fullscreen();
   Neuvol = new Neuroevolution({
     population: numPrey,
     network: [numSensors, [9], 2],
@@ -211,13 +213,13 @@ function setup() {
 
 
 function draw() {
-  background(90, 89, 90);
+  background(200, 240, 200);
   game.update();
   game.display(showSensors);
 }
 
 function shouldShowSensors() {
-  print("hi");
+  //print("hi");
   if (!showSensors) {
     showSensors = true;
   } else if (showSensors) {
